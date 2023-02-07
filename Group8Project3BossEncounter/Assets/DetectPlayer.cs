@@ -1,37 +1,44 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
+
 
 public class DetectPlayer : MonoBehaviour
 {
-    public GameObject Boss;
-
+    public NavMeshAgent enemy;
     public Transform Player;
-    public enum BossState//
-    {
-        Idle,
-        Follow,
-        Death,
-    }
+    private UnityEngine.AI.NavMeshAgent nav;
+
+
     private void Start()
     {
-        this.GetComponent<Follow>().enabled = false;
+        nav.enabled = false;
+
+    }
+    private void Update()
+    {
+
     }
 
-    private void OnTriggerEnter(Collider other )
+    private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
-            this.GetComponent<Follow>().enabled = true;
-        }
-    }
-    private void OnTriggerExit(Collider other)
-    {
+            enemy.SetDestination(Player.position);
 
-        if (other.tag == "Player")
+        }
+        else
         {
-            this.GetComponent<Follow>().enabled = false;
+            nav.enabled = false;
+
         }
     }
+
 }
+
+
+
+
+
 
