@@ -8,12 +8,13 @@ public class DetectPlayer : MonoBehaviour
 {
     public NavMeshAgent enemy;
     public Transform Player;
-    private UnityEngine.AI.NavMeshAgent nav;
+  
 
 
     private void Start()
     {
-        nav.enabled = false;
+        enemy.enabled = true;
+
 
     }
     private void Update()
@@ -25,20 +26,31 @@ public class DetectPlayer : MonoBehaviour
     {
         if (other.tag == "Player")
         {
+            enemy.enabled = true;
+
             enemy.SetDestination(Player.position);
 
         }
-        else
+       
+    }
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.tag == "Player")
         {
-            nav.enabled = false;
+            enemy.enabled = true;
+
+            enemy.SetDestination(Player.position);
+
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            enemy.enabled = false; 
+
 
         }
     }
 
 }
-
-
-
-
-
-
