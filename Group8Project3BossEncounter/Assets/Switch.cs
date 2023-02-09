@@ -9,11 +9,18 @@ public class Switch : MonoBehaviour
     bool active = false;
     private bool enableE;
     public GameObject Boss;
+    public GameObject text;
+
+    public GameObject gunModel;
+
+    public bool inEnemyRange;
     private void Start()
     {
         enableE = false;
         Boss.SetActive(true);
-
+        text.SetActive(false);
+        inEnemyRange = false;
+        gunModel.SetActive(true);
     }
 
     private void Update()
@@ -25,12 +32,12 @@ public class Switch : MonoBehaviour
         {
             Debug.Log("switch activated");
             enableE = true;
+            text.SetActive(true);
+            gunModel.SetActive(false);
 
 
-
-            
         }
-        if (Input.GetKeyDown(KeyCode.E) && enableE == true)
+        if (Input.GetKeyDown(KeyCode.E) && enableE == true && inEnemyRange)
         {
            
                 Boss.SetActive(false);

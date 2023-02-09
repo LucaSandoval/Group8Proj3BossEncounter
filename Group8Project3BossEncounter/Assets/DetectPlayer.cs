@@ -8,7 +8,7 @@ public class DetectPlayer : MonoBehaviour
 {
     public NavMeshAgent enemy;
     public Transform Player;
-  
+    public Switch switchScript;
 
 
     private void Start()
@@ -27,7 +27,7 @@ public class DetectPlayer : MonoBehaviour
         if (other.tag == "Player")
         {
             enemy.enabled = true;
-
+            switchScript.inEnemyRange = true;
             enemy.SetDestination(Player.position);
 
         }
@@ -47,8 +47,8 @@ public class DetectPlayer : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            enemy.enabled = false; 
-
+            enemy.enabled = false;
+            switchScript.inEnemyRange = true;
 
         }
     }
